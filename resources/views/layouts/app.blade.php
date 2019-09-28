@@ -75,7 +75,7 @@
           @auth
           <div class="container">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-4 mb-5">
                 <ul class="list-group">
                   <li class="list-group-item">
                     <a href="#">Posts</a>
