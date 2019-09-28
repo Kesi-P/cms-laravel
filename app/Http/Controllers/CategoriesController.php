@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 
 class CategoriesController extends Controller
 {
@@ -13,7 +14,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        return view('categories.index')->with('categories',Category::all()); //fetch all categories
     }
 
     /**
@@ -32,9 +33,19 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request)//automatically inject the instance
     {
-        //
+        $this->validate($request,[
+          'name'=>'required|unique:categories'
+        ]);
+
+        $test = new Category();
+        Category::create([    //Category = tablename,model
+          'name' => $request->name //creat brand new category name
+        ]);
+
+        session()->flash('success', ' Category is created');
+        return redirect(route('categories.index'));
     }
 
     /**
