@@ -4,7 +4,7 @@
 
 <div class="card card-default">
   <div class="card-header">
-    Categories
+    {{ isset($categoryid) ? 'Edit Category' : ' Create Category'}}
   </div>
   <div class="card-body">
     @if($errors->any())
@@ -18,14 +18,17 @@
       </ul>
     </div>
     @endif
-    <form action="{{ route('categories.store') }}" method="POST">
+    <form action="{{ isset($categoryid) ? route('categories.update',$categoryid->id) : route('categories.store') }}" method="POST">
       @csrf
+      @if(isset($categoryid))
+      @method('PUT') <!--As form can have put or get but for update we need to put , this is how to tell laravel-->
+      @endif
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" class="form-control" value="">
+        <input type="text" name="name" id="name" class="form-control" value="{{ isset($categoryid) ? $categoryid->name : '' }}">
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-success">Add Category</button>
+        <button type="submit" class="btn btn-success">{{ isset($categoryid) ? 'Save Category' : ' Add Category'}}</button>
       </div>
 
     </form>

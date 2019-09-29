@@ -12,6 +12,7 @@
     <table class="table">
       <thead>
         <th>Name</th>
+        <th></th>
       </thead>
       <tbody>
         @foreach($categories as $category)
@@ -20,7 +21,13 @@
             {{ $category -> name}}
           </td>
         </tr>
+        <tr>
+          <td>
+            <a href="{{ route('categories.edit',$category -> id) }}" class="btn btn-primary sm"> Edit</a> 
+          </td>
+        </tr>
         @endforeach
+
       </tbody>
     </table>
   </div>

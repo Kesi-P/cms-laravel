@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
-use App\Http\Requests\StoreCategories;
+use App\Http\Requests\RequestCategory\StoreCategories;
+use App\Http\Requests\RequestCategory\UpdateCategories;
 
 class CategoriesController extends Controller
 {
@@ -36,7 +37,7 @@ class CategoriesController extends Controller
      */
     public function store(StoreCategories $request)//automatically inject the instance
     {
-  
+
         Category::create([    //Category = tablename,model
           'name' => $request->name //creat brand new category name
         ]);
@@ -62,9 +63,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category) // use dynamic id from categories/{category}/edit to find in the model
     {
-        //
+        return view('categories.create')->with('categoryid' , $category);
     }
 
     /**
@@ -74,9 +75,14 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategories $request, Category $category)
     {
-        //
+       //$category = Category::find($id) need to find id then update doesn't work same way as creat
+       $category->update([
+          'name' => $request->name
+        ]);
+        session()->flash('success', ' Category is updated');
+        return redirect(route('categories.index'));
     }
 
     /**
