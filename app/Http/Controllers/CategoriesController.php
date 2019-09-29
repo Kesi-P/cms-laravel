@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Http\Requests\StoreCategories;
 
 class CategoriesController extends Controller
 {
@@ -33,13 +34,9 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)//automatically inject the instance
+    public function store(StoreCategories $request)//automatically inject the instance
     {
-        $this->validate($request,[
-          'name'=>'required|unique:categories'
-        ]);
-
-        $test = new Category();
+  
         Category::create([    //Category = tablename,model
           'name' => $request->name //creat brand new category name
         ]);
