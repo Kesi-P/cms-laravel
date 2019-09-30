@@ -8,7 +8,7 @@
     Posts
   </div>
   <div class="card-body">
-    @if($post->count() > 0)
+    @if($allpost->count() > 0)
     <table class="table">
       <thead>
         <th>Title</th>
