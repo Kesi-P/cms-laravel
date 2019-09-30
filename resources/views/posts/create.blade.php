@@ -1,4 +1,9 @@
 @extends('layouts.app')
+@section('style')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+@endsection
 @section('content')
 
 <div class="card card-default">
@@ -21,7 +26,8 @@
 
     <div class="form-group">
     <label for="content">Content</label>
-    <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+    <input id="content" type="hidden" name="content">
+    <trix-editor input="content"></trix-editor>
     </div>
 
     <div class="form-group">
@@ -38,4 +44,13 @@
   </div>
 </div>
 
+@endsection
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script type="text/javascript">
+  flatpickr("#published_at",{
+    enableTime: true,
+  });
+</script>
 @endsection
