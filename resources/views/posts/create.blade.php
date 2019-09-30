@@ -6,7 +6,7 @@
     Create Post
   </div>
   <div class="card-body">
-    <form  action="{{route('posts.store')}}" method="post">
+    <form  action="{{route('posts.store')}}" method="post" enctype="multipart/form-data"> <!--or else the file can't be uploaded-->
       @csrf
 
     <div class="form-group">
