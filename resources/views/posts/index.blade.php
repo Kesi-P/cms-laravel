@@ -8,7 +8,34 @@
     Posts
   </div>
   <div class="card-body">
+    <table class="table">
+      <thead>
+        <th>Title</th>
+        <th>Image</th>
+        <th></th>
+        <th></th>
+      </thead>
+      <tbody>
 
+          @foreach($allpost as $post)
+          <tr>
+          <td>
+            {{$post->title}}
+          </td>
+          <td>
+            <img src="{{asset('storage/'.$post->image.'')}}" width="auto" height="60px" alt="">
+          </td>
+          <td>
+            <a href="#" class="btn btn-info btn-sm">Edit</a>
+          </td>
+          <td>
+            <a href="#" class="btn btn-danger btn-sm">Trash</a>
+          </td>
+          </tr>
+          @endforeach
+
+      </tbody>
+    </table>
   </div>
 </div>
 
