@@ -35,12 +35,21 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CreatePost $request)
-    { //dd($request->image) if image uploaded
-      dd($request->image->store('posts')); //it return "posts/fELTpCPuwDgLVyFeWAev5rebrc7TDerZLoL028u0.jpeg"  generat auto file in storage/app/post
+    {
+      ////dd($request->image->store('posts')); it return "posts/fELTpCPuwDgLVyFeWAev5rebrc7TDerZLoL028u0.jpeg"  generat auto file in storage/app/post
         //uploadimage
+        $image = $request->image->store('posts');
         //CreatePosts
+        Post::create([
+          'title' =>$request->title,
+          'description' =>$request->description,
+          'content'=>$request->content,
+          'image'=>$image
+        ]);
         //flash message
+        session()->flash('success','Post Created');
         //redirect
+        return redirect(route('posts.index'));
     }
 
     /**
