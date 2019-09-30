@@ -32,7 +32,6 @@
             <form action="{{route('posts.destroy',$post->id)}}" method="post">
               @csrf
               @method('DELETE')
-              @endmethod
               <button type="submit" class="btn btn-danger btn-sm">Trash</button>
             </form>
 
