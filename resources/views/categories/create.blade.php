@@ -7,17 +7,7 @@
     {{ isset($categoryid) ? 'Edit Category' : ' Create Category'}}
   </div>
   <div class="card-body">
-    @if($errors->any())
-    <div class="alert alert-danger">
-      <ul class="list-group">
-        @foreach($errors->all() as $error)
-        <li class="list-group-item text-danger">
-          {{$error}}
-        </li>
-        @endforeach
-      </ul>
-    </div>
-    @endif
+   @include('partial.error')
     <form action="{{ isset($categoryid) ? route('categories.update',$categoryid->id) : route('categories.store') }}" method="POST">
       @csrf
       @if(isset($categoryid))

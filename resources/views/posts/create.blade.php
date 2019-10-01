@@ -11,6 +11,7 @@
     {{ isset($editpost) ? 'Edit Post' :'Create Post' }}
   </div>
   <div class="card-body">
+     @include('partial.error')
     <form  action="{{ isset($editpost) ? route('posts.update',$editpost->id) : route('posts.store') }}" method="post" enctype="multipart/form-data"> <!--or else the file can't be uploaded-->
       @csrf
       @if(isset($editpost))
