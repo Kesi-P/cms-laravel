@@ -45,6 +45,29 @@
     <label for="image">Image</label>
     <input type="file" class="form-control" id="image" name="image" value="{{ isset($editpost) ? $editpost->image :'' }}">
     </div>
+
+    <div class="form-group">
+    <label for="category_id">Category</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="category_id">
+        @if(isset($editcate))
+        @foreach($editcate as $cate)
+          <option value="{{$cate->id}}"
+            @if (isset($editpost))
+            @if ($editpost->category_id === $cate->id)
+              selected
+            @endif
+            @endif
+            >
+            {{$cate->name}}</option>
+        @endforeach
+        @else
+          @foreach($allcate as $cate)
+          <option value="{{$cate->id}}">{{$cate->name}}</option>
+          @endforeach
+        @endif
+    </select>
+  </div>
+
     <button type="submit" class="btn btn-primary mb-2">
       {{ isset($editpost) ? 'Update Post' :'Create Post' }}</button>
     </form>

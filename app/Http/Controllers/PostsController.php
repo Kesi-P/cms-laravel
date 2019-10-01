@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Http\Requests\RequestPost\CreatePost;
 use App\Http\Requests\RequestPost\UpdatePost;
+use App\Category;
 
 class PostsController extends Controller
 {
@@ -15,7 +16,7 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         return view('posts.index')->with('allpost', Post::all());
     }
 
@@ -26,7 +27,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create')->with('allcate',Category::all());
     }
 
     /**
@@ -46,7 +47,8 @@ class PostsController extends Controller
           'description' =>$request->description,
           'content'=>$request->content,
           'image'=>$image,
-          'published_at'=>$request->published_at
+          'published_at'=>$request->published_at,
+          'category_id'=>$request->category_id
         ]);
         //flash message
         session()->flash('success','Post Created');
@@ -73,7 +75,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create')->with('editpost', $post);
+        return view('posts.create')->with('editpost', $post)->with('editcate', Category::all());
     }
 
     /**
@@ -85,7 +87,7 @@ class PostsController extends Controller
      */
     public function update(UpdatePost $request, Post $post)
     {
-      $data = $request->only(['title','description','published_at','content']);
+      $data = $request->only(['title','description','published_at','content','category_id']);
         //check if a new image
         if($request->hasFile('image')){
           //upload it

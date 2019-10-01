@@ -12,6 +12,7 @@
     <table class="table">
       <thead>
         <th>Title</th>
+        <th>Category</th>
         <th>Image</th>
         <th></th>
         <th></th>
@@ -22,6 +23,14 @@
           <tr>
           <td>
             {{$post->title}}
+          </td>
+          <td>
+            <a href="{{ route('categories.edit' ,$post->category->id)}}">
+            <!--if call function catedory() in Post.php you can do Query Builder-->
+            {{$post->category()->where('id',$post->category_id)->value('name')}}
+            </a>
+            <!--can call name{{$post->category->name}}  directly cuz post belongsto -->
+            <!-- {{$post->category->name}}  -->
           </td>
           <td>
             <img src="{{asset('storage/'.$post->image.'')}}" width="auto" height="60px" alt="">
