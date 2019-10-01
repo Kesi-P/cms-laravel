@@ -77,6 +77,7 @@
               {{ session()->get('success')}}
             </div>
             @endif
+
             <div class="row">
               <div class="col-md-4 mb-5">
                 <ul class="list-group">
@@ -95,6 +96,11 @@
                 </ul>
               </div>
               <div class="col-md-8">
+                @if(Session()->has('error'))
+                <div class="alert alert-danger">
+                  {{ session()->get('error')}}
+                </div>
+                @endif
                 @yield('content')
               </div>
             </div>

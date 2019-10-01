@@ -10,13 +10,17 @@ use App\Category;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('CategorybeforePost')->only(['create']); //only to show
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
+    {   //dd(Category::all()->count());
         return view('posts.index')->with('allpost', Post::all());
     }
 
