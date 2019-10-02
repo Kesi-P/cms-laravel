@@ -2,6 +2,7 @@
 @section('style')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
 
 @endsection
 @section('content')
@@ -74,7 +75,7 @@
     @if( isset($edittag) )
     <div class="form-group">
     <label for="category_id">Tag</label>
-    <select class="form-control" id="exampleFormControlSelect1" name="tags[]" multiple> <!--can choose many tags for one post-->
+    <select class="tag-selector form-control" id="exampleFormControlSelect1" name="tags[]" multiple> <!--can choose many tags for one post-->
       @foreach($edittag as $tag)
         <option value="{{$tag->id}}"
           @if(isset($editpost))
@@ -90,7 +91,7 @@
       @if( $alltag->count() > 0 )
       <div class="form-group">
       <label for="category_id">Tag</label>
-      <select class="form-control" id="exampleFormControlSelect1" name="tags[]" multiple> <!--can choose many tags for one post-->
+      <select class="tag-selector form-control" id="exampleFormControlSelect1" name="tags[]" multiple> <!--can choose many tags for one post-->
           @foreach($alltag as $tag)
             <option value="{{$tag->id}}">{{$tag->name}}</option>
           @endforeach
@@ -107,11 +108,18 @@
 
 @endsection
 @section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script type="text/javascript">
   flatpickr("#published_at",{
     enableTime: true,
   });
+  $(document).ready(function(){
+    $(".tag-selector").select2({
+    tags: true
+  });
+  })
+
 </script>
 @endsection

@@ -33,8 +33,7 @@
             <!--can call name{{$post->category->name}}  directly cuz post belongsto -->
             <!-- {{$post->category->name}}  -->
           </td>
-          <td>
-          </td>
+  
           <td>
             <img src="{{asset('storage/'.$post->image.'')}}" width="auto" height="60px" alt="">
           </td>
