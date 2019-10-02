@@ -83,7 +83,7 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
-    {
+    {   //dd($post->tags->pluck('id')->toArray());
         return view('posts.create')->with('editpost', $post)->with('editcate', Category::all())->with('edittag',Tag::all());
     }
 
@@ -106,6 +106,9 @@ class PostsController extends Controller
           $data['image'] = $image;
         };
 
+        if($request->tags){
+          $post->Tags()->sync($request->tags); //sync to db if user unselect, not select.. help for m2m relationship
+        }
         //update atrr
         $post->update($data);
         session()->flash('success','Post Updated');

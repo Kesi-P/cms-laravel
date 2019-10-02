@@ -69,15 +69,34 @@
     </select>
     </div>
 
-    @if( $alltag->count() > 0 )
+
+
+    @if( isset($edittag) )
     <div class="form-group">
     <label for="category_id">Tag</label>
     <select class="form-control" id="exampleFormControlSelect1" name="tags[]" multiple> <!--can choose many tags for one post-->
-        @foreach($alltag as $tag)
-          <option value="{{$tag->id}}">{{$tag->name}}</option>
-        @endforeach
+      @foreach($edittag as $tag)
+        <option value="{{$tag->id}}"
+          @if(isset($editpost))
+            @if($editpost->hasTag($tag->id))
+             selected
+            @endif
+          @endif
+          >{{$tag->name}}</option>
+      @endforeach
     </select>
     </div>
+    @else
+      @if( $alltag->count() > 0 )
+      <div class="form-group">
+      <label for="category_id">Tag</label>
+      <select class="form-control" id="exampleFormControlSelect1" name="tags[]" multiple> <!--can choose many tags for one post-->
+          @foreach($alltag as $tag)
+            <option value="{{$tag->id}}">{{$tag->name}}</option>
+          @endforeach
+      </select>
+      </div>
+      @endif
     @endif
 
     <button type="submit" class="btn btn-primary mb-2">

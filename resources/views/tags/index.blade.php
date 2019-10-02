@@ -23,7 +23,7 @@
             {{ $tag -> name}}
           </td>
           <td>
-            
+            {{ $tag->Post->count()}}
           </td>
           <td>
             <a href="{{ route('tags.edit',$tag -> id) }}" class="btn btn-primary sm"> Edit</a>

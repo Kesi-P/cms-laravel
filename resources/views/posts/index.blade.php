@@ -13,6 +13,7 @@
       <thead>
         <th>Title</th>
         <th>Category</th>
+        <th>Tag</th>
         <th>Image</th>
         <th></th>
         <th></th>
@@ -31,6 +32,8 @@
             </a>
             <!--can call name{{$post->category->name}}  directly cuz post belongsto -->
             <!-- {{$post->category->name}}  -->
+          </td>
+          <td>
           </td>
           <td>
             <img src="{{asset('storage/'.$post->image.'')}}" width="auto" height="60px" alt="">
