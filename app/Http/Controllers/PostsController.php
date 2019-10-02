@@ -7,6 +7,7 @@ use App\Post;
 use App\Http\Requests\RequestPost\CreatePost;
 use App\Http\Requests\RequestPost\UpdatePost;
 use App\Category;
+use App\Tag;
 
 class PostsController extends Controller
 {
@@ -31,7 +32,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create')->with('allcate',Category::all());
+        return view('posts.create')->with('allcate',Category::all())->with('alltag',Tag::all());
     }
 
     /**
@@ -42,11 +43,11 @@ class PostsController extends Controller
      */
     public function store(CreatePost $request)
     {
-      ////dd($request->image->store('posts')); it return "posts/fELTpCPuwDgLVyFeWAev5rebrc7TDerZLoL028u0.jpeg"  generat auto file in storage/app/post
+        ////dd($request->image->store('posts')); it return "posts/fELTpCPuwDgLVyFeWAev5rebrc7TDerZLoL028u0.jpeg"  generat auto file in storage/app/post
         //uploadimage
         $image = $request->image->store('posts');
         //CreatePosts
-        Post::create([
+        $post = Post::create([
           'title' =>$request->title,
           'description' =>$request->description,
           'content'=>$request->content,
@@ -54,6 +55,10 @@ class PostsController extends Controller
           'published_at'=>$request->published_at,
           'category_id'=>$request->category_id
         ]);
+
+        if($request->tags){
+          $post->Tags()->attach($request->tags);
+        }
         //flash message
         session()->flash('success','Post Created');
         //redirect
@@ -79,7 +84,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create')->with('editpost', $post)->with('editcate', Category::all());
+        return view('posts.create')->with('editpost', $post)->with('editcate', Category::all())->with('edittag',Tag::all());
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\tags;
+use App\Tag;
 use App\Http\Requests\RequestTag\StoreTags;
 use App\Http\Requests\RequestTag\UpdateTags;
 class TagsController extends Controller
@@ -15,7 +15,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        return view('tags.index')->with('tags',tags::all()); //fetch all tags
+        return view('tags.index')->with('tags',Tag::all()); //fetch all tags
     }
 
     /**
@@ -37,7 +37,7 @@ class TagsController extends Controller
     public function store(Storetags $request)//automatically inject the instance
     {
 
-        tags::create([    //tags = tablename,model
+        Tag::create([    //tags = tablename,model
           'name' => $request->name //creat brand new tags name
         ]);
 
@@ -62,8 +62,8 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(tags $tags) // use dynamic id from tags/{tags}/edit to find in the model
-    {
+    public function edit($id) // use dynamic id from tags/{tags}/edit to find in the model
+    {   $tags = Tag::find($id);
         return view('tags.create')->with('tagsid' , $tags);
     }
 
@@ -74,9 +74,9 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Updatetags $request, tags $tags)
+    public function update(Updatetags $request,$id)
     {
-       //$tags = tags::find($id) need to find id then update doesn't work same way as creat
+       $tags = Tag::find($id);
        $tags->update([
           'name' => $request->name
         ]);
@@ -90,9 +90,9 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tags $tags)
+    public function destroy($id)
     {
-        $tags->delete();
+        Tag::find($id)->delete(); //find the query in table by id
         return redirect(route('tags.index'));
     }
 }

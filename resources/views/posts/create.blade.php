@@ -67,7 +67,18 @@
           @endforeach
         @endif
     </select>
-  </div>
+    </div>
+
+    @if( $alltag->count() > 0 )
+    <div class="form-group">
+    <label for="category_id">Tag</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="tags[]" multiple> <!--can choose many tags for one post-->
+        @foreach($alltag as $tag)
+          <option value="{{$tag->id}}">{{$tag->name}}</option>
+        @endforeach
+    </select>
+    </div>
+    @endif
 
     <button type="submit" class="btn btn-primary mb-2">
       {{ isset($editpost) ? 'Update Post' :'Create Post' }}</button>

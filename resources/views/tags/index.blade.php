@@ -23,7 +23,7 @@
             {{ $tag -> name}}
           </td>
           <td>
-          
+            
           </td>
           <td>
             <a href="{{ route('tags.edit',$tag -> id) }}" class="btn btn-primary sm"> Edit</a>
@@ -72,10 +72,11 @@
 @section('scripts')
 <script>
   function handelDelete(id){
-    //console.log('id',id);
+    console.log('id',id);
     var form = document.getElementById('deleteForm');
     form.action = '/tags/' + id;   <!--//tags/{category}-->
     $('#deleteModal').modal('show');
+    console.log(form.action);
   }
 </script>
 
