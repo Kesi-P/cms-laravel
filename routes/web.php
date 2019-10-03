@@ -27,3 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::put('restore-post/{post}','PostsController@restore'); //put use for security path, people can't direct it from url(like get or post)
 
 });
+
+Route::group(['middleware' => ['auth','VerifyisAdmin']], function () {
+  Route::get('user','UsersController@index');
+});

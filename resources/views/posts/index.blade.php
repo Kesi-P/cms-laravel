@@ -33,15 +33,7 @@
             <!--can call name{{$post->category->name}}  directly cuz post belongsto -->
             <!-- {{$post->category->name}}  -->
           </td>
-          <td>
-
-              @if(isset($alltag))
-                @if($post->hasTag($post->id))
-                 {{$tag->name}}
-                @endif
-              @endif
-
-          </td>
+        
           <td>
             <img src="{{asset('storage/'.$post->image.'')}}" width="auto" height="60px" alt="">
           </td>
