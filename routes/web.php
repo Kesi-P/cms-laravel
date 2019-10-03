@@ -30,4 +30,5 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::group(['middleware' => ['auth','VerifyisAdmin']], function () {
   Route::get('user','UsersController@index');
+  Route::post('user/{user}/become-admin','UsersController@beAdmin')->name('user.become-admin');
 });
