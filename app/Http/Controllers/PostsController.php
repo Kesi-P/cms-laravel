@@ -22,7 +22,7 @@ class PostsController extends Controller
      */
     public function index()
     {   //dd(Category::all()->count());
-        return view('posts.index')->with('allpost', Post::all());
+        return view('posts.index')->with('allpost', Post::all())->with('alltag',Tag::all());
     }
 
     /**

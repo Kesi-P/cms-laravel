@@ -92,7 +92,9 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        Tag::find($id)->delete(); //find the query in table by id
+        $tags = Tag::find($id);
+        $tags->Post()->detach();
+        $tags->delete(); //find the query in table by id
         return redirect(route('tags.index'));
     }
 }
