@@ -34,7 +34,17 @@
             <!-- {{$post->category->name}}  -->
           </td>
           <td>
-            
+
+            @foreach($alltag as $tag)
+
+                @if(isset($allpost))
+                  @if($post->hasTag($tag->id))
+                   {{$tag->name}}
+                  @endif
+                @endif
+
+            @endforeach
+
           </td>
           <td>
             <img src="{{asset('storage/'.$post->image.'')}}" width="auto" height="60px" alt="">
