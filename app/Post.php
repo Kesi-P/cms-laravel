@@ -9,7 +9,7 @@ use App\Category;
 
 class Post extends Model
 { use SoftDeletes;
-  protected $fillable =['title','description','content','image','published_at','category_id'];
+  protected $fillable =['title','description','content','image','published_at','category_id','user_id'];
 
   /**
   *@return void
@@ -32,5 +32,10 @@ class Post extends Model
   public function hasTag($tagid)
   {
     return in_array($tagid,$this->tags->pluck('id')->toArray());
+  }
+
+  public function user()
+  {
+    return $this->belongsTo('App\User'::class);
   }
 }
