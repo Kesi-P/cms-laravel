@@ -12,7 +12,10 @@
 */
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
-Route::get('blog/posts/{post}','Blog\PostsController@show'); //single post page = Blog/PostsController, url need to be unique ar else it won't show anything
+Route::get('/blog/posts/{post}','Blog\PostsController@show')->name('blog.posts'); //single post page = Blog/PostsController, url need to be unique ar else it won't show anything
+Route::get('blog/category/{category}', 'Blog\PostsController@category')->name('blog.category');
+Route::get('blog/tag/{tag}', 'Blog\PostsController@tag')->name('blog.tag');
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {

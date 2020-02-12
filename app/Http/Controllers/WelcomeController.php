@@ -21,5 +21,9 @@ class WelcomeController extends Controller
       return view('welcome')->with('categories',Category::all())
       ->with('tags',Tag::all())
       ->with('posts',$posts);
+
+      // return view('partial.sidebar')->with('categories',Category::all())
+      // ->with('tags',Tag::all())
+      // ->with('posts',$posts);
     }
 }
