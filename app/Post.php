@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Storage;
 use App\Category;
 
 class Post extends Model
-{ use SoftDeletes;
+{
+  use SoftDeletes;
+  protected $dates = ['published_at'];
   protected $fillable =['title','description','content','image','published_at','category_id','user_id'];
 
   /**
@@ -42,9 +44,15 @@ class Post extends Model
   public function scopeSearchsus($query)
   {
     $search = request()->query('search');
+
     if(!$search){
-      return $query;
+      return $query->Published();
     }
-    return $query->where('title','LIKE','%'.$search.'%');
+    return $query->Published()->where('title','LIKE','%'.$search.'%');
+  }
+
+  public function scopePublished($query)
+  {
+    return $query->where('published_at','<=',now());
   }
 }
