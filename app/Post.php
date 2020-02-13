@@ -38,4 +38,13 @@ class Post extends Model
   {
     return $this->belongsTo('App\User'::class);
   }
+
+  public function scopeSearchsus($query)
+  {
+    $search = request()->query('search');
+    if(!$search){
+      return $query;
+    }
+    return $query->where('title','LIKE','%'.$search.'%');
+  }
 }
